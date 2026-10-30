@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Engineering Lab 02</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <header>
+      <h1 id="greeting">Loading greeting...</h1>
+
+      <nav aria-label="Main navigation">
+        <ul>
+          <li>
+  <a href="#schedule" class="nav-link" aria-current="location">
+    Office Hours
+  </a>
+</li>
+<li>
+  <a href="#feedback" class="nav-link">Send Feedback</a>
+</li>
+        </ul>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <section id="schedule" aria-labelledby="schedule-heading">
+        <h2 id="schedule-heading">Office Hours</h2>
+
+        <figure>
+          <svg
+            role="img"
+            aria-labelledby="pin-title"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <title id="pin-title">Location pin</title>
+            <path
+              d="M12 22s8-7.2 8-14a8 8 0 1 0-16 0c0 6.8 8 14 8 14Z"
+              fill="currentColor"
+            />
+            <circle cx="12" cy="8" r="2.5" fill="#ffffff" />
+          </svg>
+
+          <figcaption class="text-muted">
+  All office hours are held in Room 214.
+</figcaption>
+        </figure>
+
+        <table>
+          <caption>
+            Weekly office hours
+          </caption>
+
+          <thead>
+            <tr>
+              <th scope="col">Day</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">End Time</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <th scope="row">Monday</th>
+              <td><time datetime="10:00">10:00 AM</time></td>
+              <td><time datetime="11:00">11:00 AM</time></td>
+            </tr>
+
+            <tr>
+              <th scope="row">Wednesday</th>
+              <td><time datetime="12:00">12:00 PM</time></td>
+              <td><time datetime="13:00">1:00 PM</time></td>
+            </tr>
+
+            <tr>
+              <th scope="row">Friday</th>
+              <td><time datetime="14:00">2:00 PM</time></td>
+              <td><time datetime="15:00">3:00 PM</time></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <svg
+        class="section-divider"
+        aria-hidden="true"
+        width="40"
+        height="24"
+        viewBox="0 0 40 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="20" cy="12" r="5" fill="#0b3d91" />
+      </svg>
+
+      <section id="feedback" aria-labelledby="feedback-heading">
+        <h2 id="feedback-heading">Send Feedback</h2>
+
+        <p>Use this form to send feedback about office hours.</p>
+
+        <form>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              aria-describedby="email-hint"
+              required
+            />
+           <small id="email-hint" class="text-muted">
+  We will only use this to reply to you.
+</small>
+          </div>
+
+          <fieldset>
+            <legend>Topic</legend>
+
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="topic-schedule"
+                name="topic"
+                value="schedule"
+                required
+              />
+              <label for="topic-schedule">Office hours schedule</label>
+            </div>
+
+            <div class="radio-option">
+              <input
+                type="radio"
+                id="topic-teaching"
+                name="topic"
+                value="teaching"
+              />
+              <label for="topic-teaching">Teaching and learning</label>
+            </div>
+
+            <div class="radio-option">
+              <input type="radio" id="topic-other" name="topic" value="other" />
+              <label for="topic-other">Other</label>
+            </div>
+          </fieldset>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit">Submit Feedback</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <address>Contact your instructor for help.</address>
+    </footer>
+  </body>
+</html>
