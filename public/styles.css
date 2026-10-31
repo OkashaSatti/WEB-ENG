@@ -1,3 +1,9 @@
+
+/* ========================================
+   WEB ENGINEERING LAB 04
+   Flexbox, Grid, Responsive Design and DOM
+======================================== */
+
 @layer reset, base, components, utilities;
 
 /* ========================================
@@ -26,44 +32,44 @@
 
 @layer base {
   :root {
-  color-scheme: light dark;
+    color-scheme: light dark;
 
-  --space: 1rem;
+    --space: 1rem;
 
-  --color-bg: light-dark(
-    oklch(98% 0.01 255),
-    oklch(20% 0.02 255)
-  );
+    --color-bg: light-dark(
+      oklch(98% 0.01 255),
+      oklch(20% 0.02 255)
+    );
 
-  --color-text: light-dark(
-    oklch(25% 0.02 255),
-    oklch(94% 0.01 255)
-  );
+    --color-text: light-dark(
+      oklch(25% 0.02 255),
+      oklch(94% 0.01 255)
+    );
 
-  --color-accent: light-dark(
-    oklch(45% 0.18 255),
-    oklch(75% 0.12 255)
-  );
+    --color-accent: light-dark(
+      oklch(45% 0.18 255),
+      oklch(75% 0.12 255)
+    );
 
-  --color-surface: color-mix(
-    in oklch,
-    var(--color-bg) 92%,
-    var(--color-accent)
-  );
+    --color-surface: color-mix(
+      in oklch,
+      var(--color-bg) 92%,
+      var(--color-accent)
+    );
 
-  --color-border: color-mix(
-    in oklch,
-    var(--color-text) 55%,
-    var(--color-bg)
-  );
-
-  font-family: system-ui, sans-serif;
-  color: var(--color-text);
-  background: var(--color-bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  line-height: 1.5;
-}
+    --color-border: color-mix(
+      in oklch,
+      var(--color-text) 55%,
+      var(--color-bg)
+    );
+--color-error: light-dark(oklch(45% 0.2 25), oklch(75% 0.15 25));
+    font-family: system-ui, sans-serif;
+    color: var(--color-text);
+    background: var(--color-bg);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
 
   body {
     min-width: 320px;
@@ -86,6 +92,16 @@
 ======================================== */
 
 @layer components {
+.error {
+  display: block;
+  color: var(--color-error);
+}
+
+input[aria-invalid="true"] {
+  border-color: var(--color-error);
+}
+  /* Skip Link */
+
   .skip-link {
     position: absolute;
     top: -100px;
@@ -93,52 +109,53 @@
     z-index: 1000;
     padding: 12px 18px;
     color: #ffffff;
-    background-color: var(--color-accent);
+    background: var(--color-accent);
     border-radius: 6px;
   }
-  svg {
-  color: var(--color-accent);
-}
+
   .skip-link:focus {
     top: 16px;
   }
 
+  /* SVG Icon */
+
+  svg {
+    color: var(--color-accent);
+  }
+
+  /* Lab 04 - Step 1: Flexbox Header */
+
   header {
-    padding: 28px 20px;
-    color: #ffffff;
-    background-color: var(--color-accent);
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space);
+  padding: 28px 20px;
+  color: #ffffff;
+  background: #1f2937;
+  border-block-end: 1px solid var(--color-border);
+}
 
-  header h1 {
-    max-width: 900px;
-    margin: 0 auto 16px;
-    color: #ffffff;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-  }
+header h1 {
+  max-width: 900px;
+  margin: 0;
+  color: #ffffff;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
 
-  nav {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+nav a,
+header a.nav-link {
+  color: #ffffff;
+  font-weight: 700;
+}
 
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 24px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+nav a[aria-current="location"] {
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
 
-  nav a {
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  nav a[aria-current="location"] {
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
-  }
+  /* Main Content */
 
   main {
     max-inline-size: 60rem;
@@ -160,10 +177,12 @@
     font-size: 1.7rem;
   }
 
+  /* Lab 04 - Step 3: Flexbox Figure */
+
   figure {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.5rem;
     margin-block: 20px;
   }
 
@@ -172,8 +191,37 @@
   }
 
   figcaption {
-    color: #374151;
+    color: var(--color-text);
   }
+
+  /* Lab 04 - Grid: Office Hours Section */
+
+  #schedule {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: var(--space);
+    align-items: start;
+  }
+
+  #schedule h2 {
+    grid-column: 1 / -1;
+  }
+
+  #schedule table {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  #schedule figure {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  #schedule #status {
+    grid-column: 1 / -1;
+  }
+
+  /* Table */
 
   table {
     width: 100%;
@@ -202,23 +250,35 @@
     background: #eef4ff;
   }
 
-  .section-divider {
-    display: block;
-    margin: 32px auto;
-  }
+  /* Lab 04 - Grid: Feedback Form */
 
   form {
     display: grid;
-    gap: 22px;
-  }
-
-  form p {
-    margin-block: 0.5rem 1rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--space);
   }
 
   .form-group {
     display: grid;
     gap: 8px;
+  }
+
+  form fieldset,
+  form p {
+    grid-column: 1 / -1;
+  }
+
+  form button {
+    justify-self: start;
+  }
+
+  input:not([type="radio"]),
+  textarea {
+    inline-size: 100%;
+  }
+
+  form p {
+    margin-block: 0.5rem 1rem;
   }
 
   label,
@@ -228,7 +288,6 @@
 
   input,
   textarea {
-    width: 100%;
     padding: 12px;
     color: var(--color-text);
     background: var(--color-surface);
@@ -242,7 +301,7 @@
   }
 
   small {
-    color: #374151;
+    color: var(--color-text);
   }
 
   fieldset {
@@ -259,24 +318,56 @@
     gap: 10px;
   }
 
-  button {
-  justify-self: start;
-  padding: 12px 22px;
-  color: var(--color-bg);
-  background: var(--color-accent);
-  border: 2px solid var(--color-accent);
-  border-radius: 6px;
-  font-weight: 700;
-  cursor: pointer;
-}
+  /* Buttons */
 
- button:hover {
-  background: color-mix(
-    in oklch,
-    var(--color-accent),
-    black 15%
-  );
-}
+  button {
+    justify-self: start;
+    padding: 12px 22px;
+    color: var(--color-bg);
+    background: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: color-mix(
+      in oklch,
+      var(--color-accent),
+      black 15%
+    );
+  }
+
+  /* Lab 04 - Selected Booking Row */
+
+  tr.selected th,
+  tr.selected td {
+    background: color-mix(
+      in oklch,
+      var(--color-accent) 20%,
+      var(--color-bg)
+    );
+  }
+
+  /* Focus Accessibility */
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid #0b5fff;
+    outline-offset: 3px;
+  }
+
+  /* Divider */
+
+  .section-divider {
+    display: block;
+    margin: 32px auto;
+  }
+
+  /* Footer */
 
   footer {
     padding: 24px;
@@ -288,36 +379,6 @@
   footer address {
     font-style: normal;
   }
-
-  /* Lab 3 specificity demonstration */
-
-  :where(nav ul li) a {
-    color: purple;
-  }
-
-  .nav-link {
-    color: darkgreen;
-  }
-
-  a[aria-current="location"] {
-    color: crimson;
-  }
-
-  @media (max-width: 600px) {
-    section {
-      padding: 18px 12px;
-    }
-
-    th,
-    td {
-      padding: 8px 5px;
-      font-size: 0.9rem;
-    }
-
-    nav ul {
-      gap: 12px;
-    }
-  }
 }
 
 /* ========================================
@@ -325,6 +386,7 @@
 ======================================== */
 
 @layer utilities {
+
   .text-muted {
     color: color-mix(
       in oklch,
@@ -332,241 +394,30 @@
       var(--color-bg)
     );
   }
+
+  /* Lab 04 - Heading and Status Full Width */
+
+  .span-all {
+    grid-column: 1 / -1;
+  }
 }
 
-:root {
-  --space: 1rem;
-  --color-bg: #f4f9ff;
-  --color-text: #1b222b;
-  --color-accent: #0050b5;
-  --color-surface: #ffffff;
-  --color-border: #cbd5e1;
+/* ========================================
+   5. LAB 04 - RESPONSIVE DESIGN
+======================================== */
 
-  font-family: system-ui, sans-serif;
-  color: var(--color-text);
-  background: var(--color-bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  line-height: 1.5;
-}
+@media (max-width: 40rem) {
 
-* {
-  box-sizing: border-box;
-}
+  #schedule,
+  form {
+    grid-template-columns: 1fr;
+  }
 
- body {
-  min-width: 320px;
-  padding: var(--space);
-  font-family: inherit;
-  line-height: inherit;
-  color: var(--color-text);
-  background: var(--color-bg);
-}
-
-.skip-link {
-  position: absolute;
-  top: -100px;
-  left: 16px;
-  z-index: 1000;
-  padding: 12px 18px;
-  color: #ffffff;
-  background-color: #0b3d91;
-  border-radius: 6px;
-}
-
-.skip-link:focus {
-  top: 16px;
-}
-
-header {
-  padding: 28px 20px;
-  color: #ffffff;
-  background-color: #0b3d91;
-}
-
-header h1 {
-  max-width: 900px;
-  margin: 0 auto 16px;
-  color: #ffffff;
-  font-size: clamp(1.8rem, 4vw, 2.5rem);
-}
-
-nav {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-nav ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 24px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav a {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-nav a {
-  color: var(--color-bg);
-  font-weight: 700;
-}
-
-main {
-  main {
-  max-inline-size: 60rem;
-  margin-inline: auto;
-  padding-block: 1rem;
-}
-}
-
-section {
-  padding: 28px;
-  background-color: #ffffff;
-  border: 1px solid #d9e1ee;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgb(15 23 42 / 6%);
-}
-
-h2 {
-  margin-top: 0;
-  color: var(--color-accent);
-  font-size: 1.7rem;
-}
-
-figure {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 20px 0;
-}
-
-figure svg {
-  flex-shrink: 0;
-}
-
-figcaption {
-  color: #374151;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: left;
-}
-
-caption {
-  padding: 12px;
-  font-weight: 700;
-  text-align: left;
-}
-
-th,
-td {
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-}
-
-thead {
-  color: #ffffff;
-  background-color: #174a91;
-}
-
-tbody th {
-  background-color: #eef4ff;
-}
-
-.section-divider {
-  display: block;
-  margin: 32px auto;
-}
-
-form {
-  display: grid;
-  gap: 22px;
-}
-
-.form-group {
-  display: grid;
-  gap: 8px;
-}
-
-label,
-legend {
-  font-weight: 700;
-}
-
-input,
-textarea,
-button {
-  font: inherit;
-}
-
-input[type="radio"] {
-  width: auto;
-  margin: 0;
-}
-
-small {
-  color: #374151;
-}
-
-fieldset {
-  display: grid;
-  gap: 12px;
-  padding: 18px;
-  border: 1px solid #64748b;
-  border-radius: 8px;
-}
-
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-button {
-  justify-self: start;
-  padding: 12px 22px;
-  color: #ffffff;
-  background-color: #0b3d91;
-  border: 2px solid #0b3d91;
-  border-radius: 6px;
-  font: inherit;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #082b67;
-}
-
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-textarea:focus-visible {
-  outline: 3px solid #0b5fff;
-  outline-offset: 3px;
-}
-
-footer {
-  padding: 24px;
-  color: #ffffff;
-  background-color: #172b4d;
-  text-align: center;
-}
-
-footer address {
-  font-style: normal;
-}
-
-@media (max-width: 600px) {
-  main {
-    width: calc(100% - 20px);
-    margin: 20px auto;
+  #schedule table,
+  #schedule figure,
+  #schedule #status {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   section {
@@ -583,17 +434,9 @@ footer address {
     gap: 12px;
   }
 }
-form p {
-  margin-block: 0.5rem 1rem;
-}
-:where(nav ul li) a {
-  color: purple;
-}
-
-.nav-link {
-  color: darkgreen;
-}
-
-a[aria-current="location"] {
-  color: crimson;
+/* Make day names clearly visible */
+#schedule tbody th[scope="row"] {
+  color: #172033;
+  background-color: #e2e8f0;
+  font-weight: 700;
 }
